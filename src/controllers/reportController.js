@@ -58,4 +58,24 @@ const getReport = async (req, res) => {
   }
 };
 
-module.exports = { analyzeReport, getReports, getReport };
+// @route DELETE /api/reports/:id
+const deleteReport = async (req, res) => {
+  try {
+    const report = await Report.findById(req.params.id);
+
+    if (!report) {
+      return res.status(404).json({ message: 'Report not found' });
+    }
+
+    if (report.user.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ message: 'Not authorized' });
+    }
+
+    await Report.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Report deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { analyzeReport, getReports, getReport, deleteReport };

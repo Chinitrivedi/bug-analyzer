@@ -58,24 +58,50 @@ async function loadReports() {
       return;
     }
 
-    container.innerHTML = reports.map(report => `
-      <div class="report-card" onclick="window.location.href='analyzer.html?id=${report._id}'">
-        <div class="report-card-header">
-          <div class="report-title">${report.analysis.title || 'Untitled Report'}</div>
-          <span class="severity-badge severity-${report.analysis.severity}">
-            ${report.analysis.severity}
-          </span>
-        </div>
-        <p style="font-size:13px;color:#64748b;margin-top:6px">
-          ${report.rawReport.substring(0, 100)}...
-        </p>
-        <div class="report-meta">
-          <span class="category-tag">${report.analysis.category}</span>
-          <span>${new Date(report.createdAt).toLocaleDateString()}</span>
-        </div>
+   container.innerHTML = reports.map(report => `
+  <div class="report-card">
+    <div class="report-card-header">
+      <div class="report-title" onclick="window.location.href='analyzer.html?id=${report._id}'" style="cursor:pointer">
+        ${report.analysis.title || 'Untitled Report'}
       </div>
-    `).join('');
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="severity-badge severity-${report.analysis.severity}">
+          ${report.analysis.severity}
+        </span>
+        <button 
+          onclick="deleteReport('${report._id}')" 
+          style="background:#7f1d1d;color:#fca5a5;border:none;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px">
+          Delete
+        </button>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#64748b;margin-top:6px">
+      ${report.rawReport.substring(0, 100)}...
+    </p>
+    <div class="report-meta">
+      <span class="category-tag">${report.analysis.category}</span>
+      <span>${new Date(report.createdAt).toLocaleDateString()}</span>
+    </div>
+  </div>
+`).join('');
 
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function deleteReport(id) {
+  if (!confirm('Are you sure you want to delete this report?')) return;
+
+  try {
+    const res = await fetch(`${API}/reports/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (res.ok) {
+      loadReports();
+    }
   } catch (err) {
     console.error(err);
   }
