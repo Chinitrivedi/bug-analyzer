@@ -68,6 +68,7 @@ GEMINI_API_KEY=your_gemini_api_key
 
 ## Project Structure
 
+```
 bug-analyzer/
 ├── public/
 │   ├── index.html
@@ -84,5 +85,4 @@ bug-analyzer/
 │   ├── geminiService.js
 │   └── index.js
 └── package.json
-
-
+```
