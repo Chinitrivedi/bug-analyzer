@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bug Analyzer — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo-text"><span>🐛</span>Bug Analyzer</div>
+    <div class="nav-right">
+      <span class="nav-user" id="nav-username"></span>
+      <button class="btn-secondary" onclick="window.location.href='analyzer.html'">+ New Report</button>
+      <button class="btn-secondary" onclick="handleLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-container">
+
+    <div class="page-header">
+      <h2>Dashboard</h2>
+      <p>All your analyzed bug reports</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Reports</div>
+        <div class="stat-value" id="stat-total">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Critical</div>
+        <div class="stat-value" id="stat-critical" style="color:#fca5a5">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">High</div>
+        <div class="stat-value" id="stat-high" style="color:#fdba74">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Medium / Low</div>
+        <div class="stat-value" id="stat-other" style="color:#86efac">0</div>
+      </div>
+    </div>
+
+    <!-- Reports List -->
+    <div class="reports-header">
+      <h3>Recent Reports</h3>
+      <button class="btn-secondary" onclick="window.location.href='analyzer.html'">+ Analyze New Bug</button>
+    </div>
+
+    <div id="reports-list">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading reports...</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bug Analyzer — Analyze</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo-text" style="cursor:pointer" onclick="window.location.href='dashboard.html'">
+      <span>🐛</span>Bug Analyzer
+    </div>
+    <div class="nav-right">
+      <span class="nav-user" id="nav-username"></span>
+      <button class="btn-secondary" onclick="window.location.href='dashboard.html'">Dashboard</button>
+      <button class="btn-secondary" onclick="handleLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="main-container">
+
+    <div class="page-header">
+      <h2 id="page-title">Analyze Bug Report</h2>
+      <p>Paste your raw bug report and let AI do the rest</p>
+    </div>
+
+    <div class="analyzer-grid">
+
+      <!-- Input -->
+      <div class="card">
+        <h3>📝 Raw Bug Report</h3>
+        <div class="form-group">
+          <textarea
+            id="bug-report"
+            placeholder="Paste your bug report here...
+
+Example:
+When I click the submit button on the checkout page, I get a white screen. This happens only on Chrome. I was trying to complete my purchase. The error started after yesterday's deployment."
+          ></textarea>
+        </div>
+        <br/>
+        <button class="btn-primary" id="analyze-btn" onclick="analyzeReport()">
+          🔍 Analyze with AI
+        </button>
+        <p id="analyze-error" class="error-msg" style="margin-top:8px"></p>
+      </div>
+
+      <!-- Result -->
+      <div class="card">
+        <h3>🤖 AI Analysis</h3>
+        <div id="result-container">
+          <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <p>Your analysis will appear here</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/analyzer.js"></script>
+</body>
+</html>
